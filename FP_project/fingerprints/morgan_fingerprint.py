@@ -2,7 +2,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import sys
-from fingerprints.base_fingerprint import Fingerprint  # Use absolute import
+from fingerprints.base_fingerprint import Fingerprint  
 
 class MorganFingerprint(Fingerprint):
     def calculate(self, input_file, output_file):

@@ -1,6 +1,7 @@
 import pandas as pd
 from padelpy import from_smiles
-from .base_fingerprint import Fingerprint
+from fingerprints.base_fingerprint import Fingerprint
+import sys
 
 class PubchemFingerprint(Fingerprint):
     def calculate(self, input_file, output_file):
@@ -31,3 +32,9 @@ class PubchemFingerprint(Fingerprint):
         
         # Return the resulting DataFrame
         return result_df
+    
+if __name__ == "__main__":
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    pf = PubchemFingerprint()
+    pf.calculate(input_file, output_file)

@@ -1,7 +1,8 @@
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from .base_fingerprint import Fingerprint
+from fingerprints.base_fingerprint import Fingerprint
+import sys
 
 class PatternFingerprint(Fingerprint):
     def calculate(self, input_file, output_file):
@@ -23,3 +24,9 @@ class PatternFingerprint(Fingerprint):
         result_df = pd.concat([df.reset_index(drop=True), fingerprints_df.reset_index(drop=True)], axis=1)
         result_df.to_csv(output_file, index=False)
         return result_df
+
+if __name__ == "__main__":
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    pf = PatternFingerprint()
+    pf.calculate(input_file, output_file)

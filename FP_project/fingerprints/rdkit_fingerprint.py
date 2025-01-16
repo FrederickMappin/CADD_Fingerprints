@@ -1,10 +1,10 @@
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem import rdMolDescriptors
+from rdkit.Chem import RDKFingerprint
 from fingerprints.base_fingerprint import Fingerprint
 import sys
 
-class AtomPairsFingerprint(Fingerprint):
+class RDKitFingerprint(Fingerprint):
     def calculate(self, input_file, output_file):
         df = pd.read_csv(input_file)
         if 'smiles' not in df.columns:
@@ -15,7 +15,7 @@ class AtomPairsFingerprint(Fingerprint):
         def get_fingerprint(smiles):
             mol = Chem.MolFromSmiles(smiles)
             if mol is not None:
-                return list(rdMolDescriptors.GetHashedAtomPairFingerprintAsBitVect(mol))
+                return list(RDKFingerprint(mol))
             else:
                 return None
         
@@ -28,5 +28,5 @@ class AtomPairsFingerprint(Fingerprint):
 if __name__ == "__main__":
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-    apf = AtomPairsFingerprint()
-    apf.calculate(input_file, output_file)
+    rf = RDKitFingerprint()
+    rf.calculate(input_file, output_file)

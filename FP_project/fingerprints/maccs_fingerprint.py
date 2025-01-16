@@ -1,7 +1,8 @@
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import MACCSkeys
-from .base_fingerprint import Fingerprint
+import sys
+from fingerprints.base_fingerprint import Fingerprint
 
 class MACCSFingerprint(Fingerprint):
     def calculate(self, input_file, output_file):
@@ -23,3 +24,9 @@ class MACCSFingerprint(Fingerprint):
         result_df = pd.concat([df.reset_index(drop=True), fingerprints_df.reset_index(drop=True)], axis=1)
         result_df.to_csv(output_file, index=False)
         return result_df
+
+if __name__ == "__main__":
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    mf = MACCSFingerprint()
+    mf.calculate(input_file, output_file)
