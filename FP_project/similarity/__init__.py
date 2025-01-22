@@ -1,4 +1,5 @@
 from .similarity import Similarity
-from .tanimoto_similarity import TanimotoSimilarity
+from .tanimoto import TanimotoSimilarity
+from .dice import DiceSimilarity
 
-__all__ = ['Similarity', 'TanimotoSimilarity']
+__all__ = ['Similarity', 'TanimotoSimilarity', 'DiceSimilarity']
